@@ -34,19 +34,34 @@ We use the train/val sets of PASCAL VOC 2007+2012 for training and the test set 
 The shots in the datasets/vocsplit directory are the same shots used by previous works(TFA). run voc_create_base.py and voc_create_standard.py (note path of data)
 ### for custom 
 You must 
-## Training & Evaluation 
+## Training, Evaluation & Visualize
 
+Base training
 To train a model, run
-```angular2html
+```
 python tools/train_net.py --num-gpus 4 \
-        --config-file configs/COCO-detection/faster_rcnn_R_101_FPN_base.yaml
+        --config-file configs/VOC/faster_rcnn_R_101_FPN_base.yaml
 ```
 
+Fine-tune
+```
+python tools/train_net.py --num-gpus 4 \
+        --config-file configs/VOC/faster_rcnn_R_101_FPN_ours_split1_10shot.yaml
+```
+modify 10shot to 1,2,3,5,10 for all setting.
+
+
 To evaluate the trained models, run
-```angular2html
+```
 python tools/test_net.py --num-gpus 4 \
-        --config-file configs/COCO-detection/faster_rcnn_R_101_FPN_ours_10shot.yaml \
+        --config-file configs/VOC/faster_rcnn_R_101_FPN_ours_10shot.yaml \
         --eval-only
+```
+To Vis the image/video/camer
+```
+python demo.py --config-file configs/VOC/faster_rcnn_R_101_FPN_ours_10shot.yaml \
+               --input/--video-input/--webcam file \
+	       --output outpu_dir
 ```
 
 # Citing E-FSOD
