@@ -14,8 +14,9 @@ CUDA 9.2, 10.0, 10.1, 10.2, 11.0
 GCC >= 4.9
 
 
-## install pytorch and cuda here https://pytorch.org/get-started/previous-versions/
+## install pytorch and cuda 
 ```
+here https://pytorch.org/get-started/previous-versions/
 pip install torch==1.10.0+cu102 torchvision==0.11.0+cu102 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
