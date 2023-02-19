@@ -1,0 +1,53 @@
+_BASE_: "../Base-RCNN-FPN.yaml"
+MODEL:
+#  WEIGHTS: "/home/yetao/zzk/few_shot/Efficient-FSOD/Output/split1/efc/retina_fpn/30shot/model_final.pth"
+  WEIGHTS: "retina_fpn.pth"
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 101
+  BACKBONE:
+    FREEZE: True
+    FREEZE_AT: 5
+  PROPOSAL_GENERATOR:
+    FREEZE: False
+  RPN:
+    POST_NMS_TOPK_TRAIN: 2000
+  ROI_HEADS:
+    NAME: "ContrastiveROIHeads"
+    NUM_CLASSES: 7
+    BATCH_SIZE_PER_IMAGE: 128
+    SCORE_THRESH_TEST: 0.01
+  ROI_BOX_HEAD:
+#    PREDICTOR: "CosineSimOutputLayers"
+    ALR: False
+    CONTRASTIVE_BRANCH:
+      MLP_FEATURE_DIM: 512
+      TEMPERATURE: 0.5
+      LOSS_WEIGHT: 0.2
+      DECAY:
+        ENABLED: True
+#        STEPS: [2000,]
+        RATE: 0.5
+      IOU_THRESHOLD: 0.6
+    CLS_AGNOSTIC_BBOX_REG: True
+    FREEZE: False
+    LR_FACTOR: 0.5
+INPUT:
+  MIN_SIZE_TRAIN: (480, 512, 544, 576, 608, 640, 672, 704, 736, 768, 800)
+  MIN_SIZE_TEST: 800
+DATASETS:
+  TRAIN: ('voc_2007_trainval_split1_10shot',)
+  TEST: ('voc_2007_test_split1_all',)
+SOLVER:
+  BASE_LR: 0.01
+  STEPS: (3200,)
+  WARMUP_ITERS: 10
+  MAX_ITER: 4000
+  CHECKPOINT_PERIOD: 100
+SETTING: 'Incremental'
+PHASE: 2
+METHOD: 'ours'
+INIT_ITERS: 10
+OUTPUT_DIR: "Output/ablation/hyper/512_0.5"
+TEST:
+  EVAL_PERIOD: 500
