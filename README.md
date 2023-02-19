@@ -44,6 +44,7 @@ python tools/train_net.py --num-gpus 4 \
 ```
 
 Fine-tune
+use weight trained by Base training modified in configs/VOC/faster_rcnn_R_101_FPN_ours_split1_10shot.yaml
 ```
 python tools/train_net.py --num-gpus 4 \
         --config-file configs/VOC/faster_rcnn_R_101_FPN_ours_split1_10shot.yaml
@@ -82,7 +83,4 @@ python demo.py --config-file configs/VOC/faster_rcnn_R_101_FPN_ours_10shot.yaml 
 }
 ```
 
-# License
-
-This repository is released under the [Apache 2.0 license](LICENSE).
 
