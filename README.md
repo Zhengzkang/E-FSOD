@@ -32,8 +32,9 @@ You often need to rebuild detectron2 after reinstalling PyTorch.
 ###  For VOC
 We use the train/val sets of PASCAL VOC 2007+2012 for training and the test set of PASCAL VOC 2007 for evaluation. We randomly split the 20 object classes into 15 base classes and 5 novel classes, and we consider 3 random splits.(soft link in datasets/VOC)
 The shots in the datasets/vocsplit directory are the same shots used by previous works(TFA). run voc_create_base.py and voc_create_standard.py (note path of data)
+
 ### For custom 
-You must 
+You must "detectron2/data/datasets/pascal_voc.py" "register_all_pascal_voc in detectron2/data/datasets/builtin.py"
 ## Training, Evaluation & Visualize
 
 Base training
