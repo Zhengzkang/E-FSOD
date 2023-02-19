@@ -1,34 +1,26 @@
-## Efficient Few-Shot Object Detection via Knowledge Inheritance
-
-This repository contains the official implementation for the paper 
-[Efficient Few-Shot Object Detection via Knowledge Inheritance](https://arxiv.org/abs/2203.12224).
-The codes are built upon 
-[Detectron2](https://github.com/facebookresearch/detectron2). Many thanks to
-their awesome open-source library.
-
-<div align="center">
-  <img src="demo/main.png"/>
-</div>
-
-We build a highly efficient pretrain-transfer framework (PTF) baseline without extra overheads for FSOD.
-Upon this baseline, we devise an initializer named knowledge inheritance (KI) to reliably initialize the
-novel weights for the box classifier.
-Qualitative results on Pascal-VOC, COCO and LVIS demonstrate our approach sets new state of the art with
-higher efficiency.
-We hope to motivate a trend toward powerful yet efficient few-shot technique development.
-
-
-
-## Installation
+# Installation
+## Requirements
+Linux with Python >= 3.6
+PyTorch >= 1.4
+torchvision that matches the PyTorch installation
+CUDA 9.2, 10.0, 10.1, 10.2, 11.0
+GCC >= 4.9
+detectron
+## install pytorch and cuda here https://pytorch.org/get-started/previous-versions/
 ```
-# install pytorch and cuda, please follow the versions specified in the command below
-conda install pytorch==1.4.0 python=3.7 torchvision==0.5.0 cudatoolkit=10.0 -c pytorch
+pip install torch==1.10.0+cu102 torchvision==0.11.0+cu102 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
+```
+## download our repo and install detectron2 (for ubuntu, must correspond to pytorch)
+install detectron2 here https://link.csdn.net/?target=https%3A%2F%2Fdetectron2.readthedocs.io%2Fen%2Flatest%2Ftutorials%2Finstall.html
+```
+python -m pip install detectron2 -f \
+  https://dl.fbaipublicfiles.com/detectron2/wheels/cu102/torch1.10/index.html
+ 
 
-# clone our repo and install detectron2
-git clone https://github.com/Ze-Yang/Efficient-FSOD.git
-cd Efficient-FSOD && pip install -e .
-
-# install pycocotools, lvis-api and tensorboard
+cd E-FSOD && pip install -e .
+```
+## install pycocotools, lvis-api and tensorboard
+```
 pip install cython; pip install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
 pip install git+https://github.com/lvis-dataset/lvis-api.git
 pip install tensorboard
@@ -36,9 +28,9 @@ pip install tensorboard
 To __rebuild__ detectron2, `rm -rf build/ **/*.so` then `pip install -e .`.
 You often need to rebuild detectron2 after reinstalling PyTorch.
 
-## Get Started
+## Data Prepare
 
-### Training & Evaluation in Command Line
+## Training & Evaluation 
 
 To train a model, run
 ```angular2html
@@ -53,9 +45,8 @@ python tools/test_net.py --num-gpus 4 \
         --eval-only
 ```
 
-## Citing Efficient-FSOD
-If you find this repository useful in your research, please consider to cite our paper with the following
-BibTeX entry.
+# Citing E-FSOD
+
 ```BibTeX
 @article{yang2022efficient,
   title={Efficient Few-Shot Object Detection via Knowledge Inheritance},
@@ -63,9 +54,16 @@ BibTeX entry.
   journal={arXiv preprint arXiv:2203.12224},
   year={2022}
 }
+@inproceedings{sun2021fsce,
+	title={Fsce: Few-shot object detection via contrastive proposal encoding},
+	author={Sun, Bo and Li, Banghuai and Cai, Shengcai and Yuan, Ye and Zhang, Chi},
+	booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+	pages={7352--7362},
+	year={2021}
+}
 ```
 
-## License
+# License
 
 This repository is released under the [Apache 2.0 license](LICENSE).
 
